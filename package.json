@@ -12,6 +12,7 @@
     }
   },
   "scripts": {
+    "start": "node grafana/server.js",
     "fast-test": "jest",
     "test-cover": "jest --coverage",
     "view-cover": "rm -rf ./coverage && npm run test-cover && open ./coverage/index.html",
