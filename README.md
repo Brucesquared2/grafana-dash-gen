@@ -2,14 +2,23 @@
 
 [![Node.js CI](https://github.com/uber/grafana-dash-gen/actions/workflows/node.js.yml/badge.svg)](https://github.com/uber/grafana-dash-gen/actions/workflows/node.js.yml)
 
-A collection of utility classes to construct and publish grafana graphs. The library is built ground up to incorporate grafana terminologies. 
+## What is this?
+
+`grafana-dash-gen` is a Node.js library for programmatically generating and publishing [Grafana](https://grafana.com/) dashboards. Instead of creating dashboards by hand through the Grafana UI, this library lets you define dashboards as code — making it easy to version-control, share, templatize, and automate dashboard creation.
+
+It is particularly useful when you need to:
+- Generate many similar dashboards (e.g. one per service or environment)
+- Keep your dashboard definitions in source control alongside your application code
+- Automate dashboard deployment as part of a CI/CD pipeline
+
+The library mirrors the Grafana data model so that its building blocks map directly to Grafana concepts:
 
 - **Dashboard**: Represents the final dashboard that is displayed.
-- **Row**: A row in grafana. Dashboard consists or many rows.
+- **Row**: A row in grafana. Dashboard consists of many rows.
 - **Panel**: A visual display item. A panel could be a graph, single stat or others. A row consists of many panels.
 - **Target**: A dot separated graphite string. E.g, a.b.count. A Panel consists of many targets.
 - **Annotations**: Lined markers that will annotate a graph (panel). A Dashboard can have annotations added to it. 
-- **Templates**: Variables that can be included in the state. E.g, a.$dc.b.count (to switch between datacenters). A Dashboard can have templates added to it. 
+- **Templates**: Variables that can be included in the state. E.g, a.$dc.b.count (to switch between datacenters). A Dashboard can have templates added to it.
 
 ![Alt text](/grafana.png?raw=true "Optional Title")
 
