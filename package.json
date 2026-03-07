@@ -1,9 +1,16 @@
 {
   "name": "grafana-dash-gen",
-  "version": "4.1.1",
+  "version": "4.2.0",
   "description": "A grafana dashboard generator",
   "main": "grafana/index.js",
   "types": "grafana/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./grafana/index.js",
+      "import": "./grafana/index.js",
+      "types": "./grafana/index.d.ts"
+    }
+  },
   "scripts": {
     "fast-test": "jest",
     "test-cover": "jest --coverage",

@@ -20,7 +20,7 @@
 
 import xtend = require('xtend');
 import type { GrafanaRow } from './grafana';
-import { Panel } from './panels';
+import type { Panel } from './panels';
 
 type RowOptions = Omit<Partial<GrafanaRow>, 'panels'> & {
     panels?: Panel[];

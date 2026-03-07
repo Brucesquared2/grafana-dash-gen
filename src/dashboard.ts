@@ -18,8 +18,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Templates = require('./templates');
-import Annotations = require('./annotations');
+import * as Templates from './templates';
+import * as Annotations from './annotations';
 import ExternalLink = require('./external-link');
 import type {
     GrafanaCustomTemplate,

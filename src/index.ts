@@ -31,25 +31,21 @@ import _generateGraphId = require('./id');
 import config = require('./config');
 import _Annotations = require('./annotations');
 
-namespace _dashgen {
-    export type Dashboard = _Dashboard;
-    export const Dashboard = _Dashboard;
-    export type Row = _Row;
-    export const Row = _Row;
-    export type ExternalLink = _ExternalLink;
-    export const ExternalLink = _ExternalLink;
-    export const Panels = _Panels;
-    export const Templates = _Templates;
-    export type Alert = _Alert;
-    export const Alert = _Alert;
-    export type Condition = _Condition;
-    export const Condition = _Condition;
-    export const Annotations = _Annotations;
-    export type Target = _Target;
-    export const Target = _Target;
-    export const publish = _publish;
-    export const generateGraphId = _generateGraphId;
-    export const configure = config.configure;
-}
-
-export = _dashgen;
+export type Dashboard = _Dashboard;
+export const Dashboard = _Dashboard;
+export type Row = _Row;
+export const Row = _Row;
+export type ExternalLink = _ExternalLink;
+export const ExternalLink = _ExternalLink;
+export const Panels = _Panels;
+export const Templates = _Templates;
+export type Alert = _Alert;
+export const Alert = _Alert;
+export type Condition = _Condition;
+export const Condition = _Condition;
+export const Annotations = _Annotations;
+export type Target = _Target;
+export const Target = _Target;
+export const publish = _publish;
+export const generateGraphId = _generateGraphId;
+export const configure = config.configure;

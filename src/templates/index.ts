@@ -21,11 +21,7 @@
 import _Custom = require('./custom');
 import _Query = require('./query');
 
-namespace templates {
-    export type Custom = _Custom;
-    export const Custom = _Custom;
-    export type Query = _Query;
-    export const Query = _Query;
-}
-
-export = templates;
+export type Custom = _Custom;
+export const Custom = _Custom;
+export type Query = _Query;
+export const Query = _Query;
