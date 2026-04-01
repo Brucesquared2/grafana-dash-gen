@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+v4.2.0 (2026-03-07)
+-------------------
+
+ - Convert module exports from TypeScript namespace + `export =` pattern to named ES module exports, enabling `import { Dashboard, Row } from 'grafana-dash-gen'` for TypeScript consumers (#140)
+ - Add `exports` field to `package.json` for proper Node.js module resolution
+
+
 v4.1.1 (2026-02-09)
 -------------------
 

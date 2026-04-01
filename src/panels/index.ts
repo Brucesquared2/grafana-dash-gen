@@ -24,17 +24,14 @@ import _Text = require('./text');
 import _Table = require('./table');
 import _DashboardList = require('./dashboard_list');
 
-namespace panels {
-    export type Graph = _Graph;
-    export const Graph = _Graph;
-    export type SingleStat = _SingleStat;
-    export const SingleStat = _SingleStat;
-    export type Text = _Text;
-    export const Text = _Text;
-    export type Table = _Table;
-    export const Table = _Table;
-    export type DashboardList = _DashboardList;
-    export const DashboardList = _DashboardList;
-    export type Panel = Graph | SingleStat | Text | Table | DashboardList;
-}
-export = panels;
+export type Graph = _Graph;
+export const Graph = _Graph;
+export type SingleStat = _SingleStat;
+export const SingleStat = _SingleStat;
+export type Text = _Text;
+export const Text = _Text;
+export type Table = _Table;
+export const Table = _Table;
+export type DashboardList = _DashboardList;
+export const DashboardList = _DashboardList;
+export type Panel = _Graph | _SingleStat | _Text | _Table | _DashboardList;

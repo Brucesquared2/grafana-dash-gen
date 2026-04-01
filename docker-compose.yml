@@ -1,0 +1,97 @@
+# docker-compose.yml — MAPS-Quadcore container orchestration
+#
+# Runs grafana-dash-gen as a REST microservice alongside a Grafana instance.
+# Each service is independently replaceable — add or remove containers without
+# affecting the others.
+#
+# Usage:
+#   docker compose up -d           # start all services
+#   docker compose up -d grafana-dash-gen   # start only the dash-gen service
+#   docker compose stop grafana    # stop only Grafana, keep other services
+#   docker compose down            # stop and remove all containers
+#
+# To attach an additional service from another repo, add a new entry under
+# `services:` and connect it to the `maps-network` network.
+#
+# Environment variables (override via a .env file or shell export):
+#   GRAFANA_ADMIN_PASSWORD  — Grafana admin password  (default: admin)
+#   DASH_GEN_PORT           — host port for the dash-gen API (default: 3000)
+#   GRAFANA_PORT            — host port for Grafana UI     (default: 3001)
+
+networks:
+  maps-network:
+    driver: bridge
+
+volumes:
+  grafana-storage:
+
+services:
+  # ── grafana-dash-gen ─────────────────────────────────────────────────────
+  # REST API that generates and publishes Grafana dashboards.
+  # Part of the MAPS-Quadcore "Tool Suite" pillar.
+  grafana-dash-gen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    image: maps/grafana-dash-gen:latest
+    container_name: grafana-dash-gen
+    restart: unless-stopped
+    environment:
+      PORT: "3000"
+    ports:
+      - "${DASH_GEN_PORT:-3000}:3000"
+    networks:
+      - maps-network
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+      maps.quadcore.pillar: "tool-suite"
+      maps.quadcore.service: "grafana-dash-gen"
+
+  # ── Grafana ───────────────────────────────────────────────────────────────
+  # Grafana OSS for dashboard visualisation.
+  # grafana-dash-gen publishes dashboards to this instance.
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "${GRAFANA_ADMIN_PASSWORD:?Set GRAFANA_ADMIN_PASSWORD before starting (e.g. export GRAFANA_ADMIN_PASSWORD=changeme)}"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    ports:
+      - "${GRAFANA_PORT:-3001}:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    networks:
+      - maps-network
+    labels:
+      maps.quadcore.pillar: "tool-suite"
+      maps.quadcore.service: "grafana"
+
+  # ── Placeholder: attach additional MAPS-Quadcore services ─────────────────
+  # To plug in another repo as a container, uncomment and customise:
+  #
+  # my-ai-service:
+  #   image: maps/my-ai-service:latest      # or build: { context: ../my-ai-service }
+  #   container_name: my-ai-service
+  #   restart: unless-stopped
+  #   networks:
+  #     - maps-network
+  #   labels:
+  #     maps.quadcore.pillar: "ai-suite"
+  #     maps.quadcore.service: "my-ai-service"
+  #
+  # my-trading-service:
+  #   image: maps/my-trading-service:latest
+  #   container_name: my-trading-service
+  #   restart: unless-stopped
+  #   networks:
+  #     - maps-network
+  #   labels:
+  #     maps.quadcore.pillar: "trading-suite"
+  #     maps.quadcore.service: "my-trading-service"

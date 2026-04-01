@@ -1,0 +1,22 @@
+# Dependencies & build artifacts
+node_modules
+# grafana — compiled TypeScript output; the Dockerfile rebuilds from source
+grafana
+
+# Test / coverage artefacts
+coverage
+.nyc_output
+
+# Editor / OS files
+.DS_Store
+.idea
+*.log
+npm-debug.log*
+
+# Environment files (never bake secrets into the image)
+.env
+.env.*
+
+# Git metadata
+.git
+.github
